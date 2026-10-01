@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd \"/Users/rajnandhinija/Desktop/KAVIN'S/portfolio \" && mkdir -p public/images/profile public/images/projects public/icons src/app/about \"src/app/projects/[slug]\" src/app/experience src/app/contact src/components/layout src/components/sections src/components/ui src/data src/hooks src/lib src/types && touch public/images/profile/.gitkeep public/images/projects/.gitkeep public/icons/.gitkeep src/hooks/.gitkeep)"
+    ]
+  }
+}

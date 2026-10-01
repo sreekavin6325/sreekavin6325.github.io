@@ -1,0 +1,11 @@
+/* Home hero backdrop (HeroBackground.tsx). */
+
+.hero-bg {
+  /* Fixed, so the picture also fills behind the header and footer */
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  background: #000;
+  pointer-events: none;
+  z-index: -1;
+}
