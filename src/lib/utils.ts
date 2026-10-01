@@ -7,7 +7,7 @@ export const siteConfig = {
   description:
     "Portfolio of Kavin, a software developer building fast, accessible web experiences.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
-  email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "you@example.com",
+  email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "arsreekavin171963@gmail.com",
   resume: "/resume.pdf",
   /** Home status chip — edit to match what you are doing now. */
   status: "Open to opportunities",
@@ -24,8 +24,8 @@ export const navLinks: NavLink[] = [
 ];
 
 export const socialLinks: SocialLink[] = [
-  { label: "GitHub", href: "https://github.com/your-username" },
-  { label: "LinkedIn", href: "https://linkedin.com/in/your-username" },
+  { label: "GitHub", href: "https://github.com/sreekavin6325" },
+  { label: "LinkedIn", href: "https://linkedin.com/in/sreekavin-a-r" },
 ];
 
 /** Join class names, skipping falsy values. */
