@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import Navigation from "@/components/layout/Navigation";
 import { FlowButton } from "@/components/ui/flow-button";
+import { MusicToggle } from "@/components/ui/music-toggle";
 import { cn, siteConfig } from "@/lib/utils";
 
 export default function Header() {
@@ -31,9 +32,12 @@ export default function Header() {
           <Navigation />
         </div>
 
-        <div className="hidden justify-self-end lg:block">
-          <FlowButton href={siteConfig.resume} text="Resume" size="sm" external />
-        </div>
+        {/* One music toggle for all sizes: before Resume on desktop, before the menu on phones */}
+        <div className="flex items-center gap-3 justify-self-end">
+          <MusicToggle />
+          <div className="hidden lg:block">
+            <FlowButton href={siteConfig.resume} text="Resume" size="sm" external />
+          </div>
 
         <button
           type="button"
@@ -47,6 +51,7 @@ export default function Header() {
             {open ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
           </svg>
         </button>
+        </div>
       </div>
 
       {open && (

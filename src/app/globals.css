@@ -19,6 +19,18 @@
   /* Home tech strip (content is doubled, so -50% loops seamlessly) */
   --animate-marquee: marquee 40s linear infinite;
 
+  /* Music toggle equaliser bars */
+  --animate-eq: eq 0.9s ease-in-out infinite alternate;
+
+  @keyframes eq {
+    from {
+      transform: scaleY(0.25);
+    }
+    to {
+      transform: scaleY(1);
+    }
+  }
+
   @keyframes marquee {
     to {
       transform: translateX(-50%);
