@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { FlowButton } from "@/components/ui/flow-button";
 import { cn } from "@/lib/utils";
 
 const HINTS: Array<[number, string]> = [
@@ -26,6 +27,9 @@ type Phase = "loading" | "done" | "leaving" | "gone";
 /**
  * Full-screen loader shown on the first page load only (the root layout persists across
  * client-side navigation). Styles live in globals.css under `.site-loader`.
+ * When loading finishes it waits for an "Enter" click: browsers only allow sound after a
+ * user gesture, so that click is what lets the background music (ui/music-toggle) start
+ * the moment the loader closes.
  */
 export default function LoadingScreen() {
   const router = useRouter();
@@ -59,15 +63,18 @@ export default function LoadingScreen() {
         return;
       }
       setPhase("done");
-      timeout = setTimeout(() => {
-        setPhase("leaving");
-        timeout = setTimeout(() => setPhase("gone"), 500);
-      }, 500);
     };
 
     tick();
     return () => clearTimeout(timeout);
   }, []);
+
+  // Leaving: fade out, then unmount.
+  useEffect(() => {
+    if (phase !== "leaving") return;
+    const timeout = setTimeout(() => setPhase("gone"), 500);
+    return () => clearTimeout(timeout);
+  }, [phase]);
 
   if (phase === "gone") return null;
 
@@ -106,6 +113,11 @@ export default function LoadingScreen() {
         <p className="site-loader__hint" role="status" aria-live="polite">
           {hint}
         </p>
+
+        {/* Enter: the click also starts the music (see the note above) */}
+        <div inert={!done} className={cn("transition-opacity duration-500", done ? "opacity-100" : "pointer-events-none opacity-0")}>
+          <FlowButton text="Enter" onClick={() => setPhase("leaving")} />
+        </div>
       </div>
     </div>
   );
