@@ -3,12 +3,14 @@
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
-// Background music (public/audio/vynto.m4a), looping at low volume. Browsers block sound
+// Background music (public/audio/vynto-low.m4a), looping very quietly. Browsers block sound
 // until the visitor interacts, so playback starts on the first click/key/touch unless they
 // muted it. The choice is remembered. Lives in the Header, so it keeps playing across pages.
 
-const SRC = "/audio/vynto.m4a";
-const VOLUME = 0.1;
+const SRC = "/audio/vynto-low.m4a";
+// The track itself is mixed quiet (about -33 dB from the original, which also clipped), because
+// iOS ignores `audio.volume`. Lower this to make it quieter still on other browsers.
+const VOLUME = 1;
 const STORAGE_KEY = "music-muted";
 
 export function MusicToggle({ className }: { className?: string }) {
