@@ -143,7 +143,7 @@ function execute(line: string, navigate?: (href: string) => void): ReactNode | t
             </div>
           ))}
           <p>
-            → <Link href="/experience" className={linkClass}>open experience</Link> for details
+            → <Link href="#experience" className={linkClass}>open experience</Link> for details
           </p>
         </div>
       );
@@ -316,8 +316,8 @@ export default function About() {
   }
 
   return (
-    <section className="container-page flex flex-1 flex-col py-6 sm:py-10">
-      <h1 className="sr-only">About</h1>
+    <section id="about" className="container-page flex min-h-screen flex-col py-6 sm:py-10">
+      <h2 className="sr-only">About</h2>
 
       <div className="grid flex-1 gap-6 lg:grid-cols-[minmax(260px,340px)_1fr]">
       {/* Portrait, as a second window beside the terminal (desktop) */}

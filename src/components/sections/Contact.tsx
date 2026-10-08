@@ -317,7 +317,7 @@ export default function Contact({ headingAs: Heading = "h2" }: ContactProps) {
   return (
     <section
       id="contact"
-      className="container-page grid flex-1 items-center gap-6 py-3 lg:grid-cols-[1fr_1.05fr] lg:gap-10"
+      className="container-page grid min-h-screen items-center gap-6 py-3 lg:grid-cols-[1fr_1.05fr] lg:gap-10"
     >
       {/* The robot: watches you type, hides its eyes for your phone number, shows my LinkedIn */}
       <div ref={robotBoxRef} className="relative h-72 sm:h-96 lg:h-[min(78vh,660px)]">

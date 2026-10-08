@@ -15,12 +15,13 @@ export const siteConfig = {
   focusAreas: ["Web Development", "AI / ML", "Automation"],
 };
 
+// In-page anchors (single scrollable page): each href matches a section id.
 export const navLinks: NavLink[] = [
-  { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Projects", href: "/projects" },
-  { label: "Experience", href: "/experience" },
-  { label: "Contact", href: "/contact" },
+  { label: "Home", href: "#home" },
+  { label: "About", href: "#about" },
+  { label: "Projects", href: "#projects" },
+  { label: "Experience", href: "#experience" },
+  { label: "Contact", href: "#contact" },
 ];
 
 export const socialLinks: SocialLink[] = [

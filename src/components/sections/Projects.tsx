@@ -26,8 +26,11 @@ export default function Projects() {
   const open = (index: number) => router.push(`/projects/${projects[index].slug}`);
 
   return (
-    <section className="relative flex flex-1 flex-col">
-      <h1 className="sr-only">Projects</h1>
+    <section id="projects" className="relative flex min-h-screen flex-col">
+      <div className="flex flex-col items-center pt-12 pb-6 text-center sm:pt-16">
+        <p className="font-mono text-[11px] tracking-[0.4em] text-muted uppercase">Selected Work</p>
+        <h2 className="mt-2 text-4xl font-semibold tracking-tight sm:text-6xl">Projects</h2>
+      </div>
 
       {/* Absolutely positioned so the spread measures a definite stage size. */}
       <div className="relative min-h-[360px] flex-1">

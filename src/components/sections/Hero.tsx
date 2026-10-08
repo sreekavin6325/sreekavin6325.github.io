@@ -16,9 +16,10 @@ const TOOLS = skills.flatMap((group) => group.skills);
 
 export default function Hero() {
   return (
-    <section className="relative isolate flex flex-1 flex-col overflow-hidden">
-      {/* On desktop the robot fills the whole window (behind header and footer), so its arms and legs aren't clipped. */}
-      <Robot className="relative h-44 w-full sm:h-96 lg:fixed lg:inset-0 lg:h-full" />
+    <section id="home" className="relative isolate flex min-h-screen flex-col overflow-hidden">
+      {/* On desktop the robot fills the hero section, so its arms and legs aren't clipped. It
+          scrolls away with the hero (the Contact section has its own robot). */}
+      <Robot className="relative h-44 w-full sm:h-96 lg:absolute lg:inset-0 lg:h-full" />
 
       {/* The text layer lets the pointer through to the robot (so it keeps tracking the cursor);
           only the buttons capture clicks. */}
@@ -60,8 +61,8 @@ export default function Hero() {
             />
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-4 sm:mt-8 lg:pointer-events-auto lg:justify-start">
-            <FlowButton href="/projects" text="View my work" />
-            <FlowButton href="/contact" text="Get in touch" />
+            <FlowButton href="#projects" text="View my work" />
+            <FlowButton href="#contact" text="Get in touch" />
           </div>
           <dl className="mt-6 hidden sm:flex justify-center gap-8 sm:mt-8 lg:justify-start">
             {STATS.map((stat) => (

@@ -331,10 +331,10 @@ export default function Experience() {
         }
       : gsap.quickTo(state, "pos", { duration: 0.9, ease: "power3.out" });
 
-    // Progress = how much of the road has passed the car's line on screen.
-    // The car rides the screen line where the road starts (just below the title), so it
-    // sits at START on arrival and keeps that height as the page scrolls.
-    const carLine = () => Math.round(box.getBoundingClientRect().top + window.scrollY);
+    // Progress = how much of the path has passed the ship's line on screen. The ship rides
+    // this fixed line in the VIEWPORT (not a document offset — the section no longer starts
+    // the page), so it sits at LAUNCH when the stage arrives and holds that height after.
+    const carLine = () => Math.round(Math.min(320, window.innerHeight * 0.3));
     const trigger = ScrollTrigger.create({
       trigger: box,
       start: () => `top ${carLine()}px`,
@@ -479,13 +479,13 @@ export default function Experience() {
   }, []);
 
   return (
-    <section ref={sectionRef} aria-labelledby="experience-heading" className="relative overflow-x-clip">
+    <section id="experience" ref={sectionRef} aria-labelledby="experience-heading" className="relative overflow-x-clip">
       {/* Title */}
       <div className="flex flex-col items-center pt-12 pb-12 text-center sm:pt-16">
         <p className="font-mono text-[11px] tracking-[0.4em] text-muted uppercase">Career Journey</p>
-        <h1 id="experience-heading" className="mt-2 text-4xl font-semibold tracking-tight sm:text-6xl">
+        <h2 id="experience-heading" className="mt-2 text-4xl font-semibold tracking-tight sm:text-6xl">
           Experience
-        </h1>
+        </h2>
         <p
           ref={hintRef}
           className="mt-4 font-mono text-[10px] tracking-[0.3em] text-muted uppercase"
@@ -730,7 +730,7 @@ export default function Experience() {
             Next stop could be your team. Let&apos;s talk about what we can build together.
           </p>
           <div className="relative mt-8 flex flex-wrap justify-center gap-4">
-            <FlowButton href="/contact" text="Get in touch" />
+            <FlowButton href="#contact" text="Get in touch" />
             <FlowButton href={siteConfig.resume} text="Resume" external />
           </div>
         </div>

@@ -49,7 +49,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
   return (
     <article className="container-page max-w-3xl py-20">
-      <Link href="/projects" className="font-mono text-sm text-muted hover:text-accent">
+      <Link href="/#projects" className="font-mono text-sm text-muted hover:text-accent">
         ← Back to projects
       </Link>
 

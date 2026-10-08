@@ -23,7 +23,7 @@ export default function Header() {
             : "h-16",
         )}
       >
-        <Link href="/" className="justify-self-start font-mono text-lg font-bold text-foreground">
+        <Link href="#home" className="justify-self-start font-mono text-lg font-bold text-foreground">
           {siteConfig.name}
           <span className="text-accent">.</span>
         </Link>

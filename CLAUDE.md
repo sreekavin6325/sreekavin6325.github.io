@@ -18,30 +18,38 @@ The project folder name ends with a space: `/Users/rajnandhinija/Desktop/KAVIN'S
 
 - **Black & white only.** Tokens in `src/app/globals.css` `@theme` (`background`, `surface`,
   `surface-2`, `border`, `foreground`, `muted`, `accent`). No colours.
-- **Pages fit one screen without scrolling** (Home, About, Projects, Contact) on desktop and
-  phone. Exceptions: Experience (scroll-driven by design) and project detail pages.
+- **Single scrollable page.** Home, About, Projects, Experience and Contact are sections
+  stacked on `/` (each `min-h-screen`, id'd `#home`/`#about`/`#projects`/`#experience`/`#contact`),
+  not separate routes — the nav scrolls to them. Only `/projects/[slug]` is a real route.
+  Each section still fits one screen edge-to-edge except Experience (tall, scroll-driven by design).
 - Premium, minimal, animated feel. Verify every visual change in the browser at 1280×800
   and 375×812 (mobile), and check `scrollHeight === innerHeight` where pages must fit.
 - Don't invent facts about the owner's work; ask, or draft clearly marked text for review.
 
 ## Structure
 
-| Page | Main component | Notes |
+`app/page.tsx` renders all five sections in order. `lib/utils.ts` `navLinks` hrefs (`#home`
+etc.) drive `layout/Navigation.tsx`, which scrollspies the sections (IntersectionObserver) to
+highlight the current one; clicking a link is a plain in-page anchor (native smooth scroll).
+
+| Section id | Component | Notes |
 | --- | --- | --- |
-| `/` | `sections/Hero.tsx` | Spline 3D robot (cursor-following) + edge labels. Site backdrop `ui/HeroBackground` (`public/images/hero-bg.webp`) is fixed behind every page via `layout/SiteBackground`; header is a black glass bar there |
-| `/about` | `sections/About.tsx` | Interactive terminal (typed intro, commands) + portrait window |
-| `/projects` | `sections/Projects.tsx` | `ui/card-spread.tsx` "lifted card" hand of projects |
-| `/projects/[slug]` | `app/projects/[slug]/page.tsx` | Renders optional sections: features, techStack, dataset, metrics, objective, workflow, contribution, research |
-| `/experience` | `sections/Experience.tsx` | GSAP ScrollTrigger: car drives a winding SVG road; scenery trees; exhaust; one checkpoint per screen |
-| `/contact` | `sections/Contact.tsx` | Robot puppet reacts to the form; form saves to Google Sheets; paper-plane send animation |
+| `#home` | `sections/Hero.tsx` | Spline 3D robot (cursor-following) + edge labels. Site backdrop `ui/HeroBackground` (`public/images/hero-bg.webp`) is fixed behind the whole page via `layout/SiteBackground`; header is a black glass bar |
+| `#about` | `sections/About.tsx` | Interactive terminal (typed intro, commands) + portrait window |
+| `#projects` | `sections/Projects.tsx` | `ui/card-spread.tsx` "lifted card" hand of projects |
+| — | `app/projects/[slug]/page.tsx` | Separate route (exception above). Renders optional sections: features, techStack, dataset, metrics, objective, workflow, contribution, research. "Back" goes to `/#projects` |
+| `#experience` | `sections/Experience.tsx` | GSAP ScrollTrigger: ship flies a winding path through space over the site backdrop; one waypoint per screen; mission HUD + arrival panel |
+| `#contact` | `sections/Contact.tsx` | Robot puppet reacts to the form; form saves to Google Sheets; paper-plane send animation |
 
 Content lives in `src/data/` (projects, experience, skills) and `siteConfig`/`socialLinks`
 in `src/lib/utils.ts`. Types in `src/types/index.ts`. Images in `public/images/{profile,projects}`;
 resume at `public/resume.pdf`; favicons in `public/`.
 
-Layout-wide: `layout/Header.tsx` + `Navigation.tsx` (Flow Buttons, centred, `lg:` breakpoint),
-`layout/LoadingScreen.tsx` (first-load loader; waits for `[data-robot][data-loaded=true]`;
-**a reload on any page redirects to `/`**, direct visits don't).
+Layout-wide: `layout/Header.tsx` + `Navigation.tsx` (Flow Buttons, centred, `lg:` breakpoint,
+scrollspy — see Structure), `ui/music-toggle.tsx` lives in the header too (looping background
+track, muted state remembered). `layout/LoadingScreen.tsx` (first-load loader; waits for
+`[data-robot][data-loaded=true]`, then an **Enter** click closes it and is the gesture that
+starts the music; **reloading `/projects/[slug]` redirects to `/`**, direct visits don't).
 
 ## Contact form → Google Sheets
 
