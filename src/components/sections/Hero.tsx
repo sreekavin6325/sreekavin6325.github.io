@@ -19,7 +19,7 @@ export default function Hero() {
     <section id="home" className="relative isolate flex min-h-screen flex-col overflow-hidden">
       {/* On desktop the robot fills the hero section, so its arms and legs aren't clipped. It
           scrolls away with the hero (the Contact section has its own robot). */}
-      <Robot className="relative h-44 w-full sm:h-96 lg:absolute lg:inset-0 lg:h-full" />
+      <Robot eager className="relative h-44 w-full sm:h-96 lg:absolute lg:inset-0 lg:h-full" />
 
       {/* The text layer lets the pointer through to the robot (so it keeps tracking the cursor);
           only the buttons capture clicks. */}

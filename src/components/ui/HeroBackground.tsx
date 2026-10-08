@@ -31,9 +31,11 @@ export default function HeroBackground({ labels = false }: { labels?: boolean })
         fill
         priority
         sizes="100vw"
-        className="object-cover object-center brightness-40"
+        className="object-cover object-center"
       />
-      {/* Darkens the sides slightly so the hero text stays readable */}
+      {/* Dims the picture (cheaper than a CSS brightness filter on a fixed image) and darkens
+          the sides further so the text over it stays readable */}
+      <div className="absolute inset-0 bg-black/60" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_35%,rgba(0,0,0,0.55)_100%)]" />
 
       {labels && (

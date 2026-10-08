@@ -22,7 +22,13 @@ export function ScatterArea({ className, children }: { className?: string; child
 
   useEffect(() => {
     const area = ref.current;
-    if (!area || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!area) return;
+    // Touch screens have no hover, so the effect never shows - and measuring every letter on
+    // each pointer event is exactly the work a phone can least afford.
+    const skip =
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+      window.matchMedia("(hover: none), (pointer: coarse)").matches;
+    if (skip) return;
 
     let letters: LetterState[] = [];
     let inside = false;

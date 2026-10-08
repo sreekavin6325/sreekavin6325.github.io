@@ -354,9 +354,20 @@ export default function Experience() {
     let nextPuff = 0;
     let puffBudget = 0;
 
+    // The flight only matters while the section is on screen; off screen this loop would
+    // still write dozens of transforms a frame behind the other sections.
+    let onScreen = true;
+    const visibility = new IntersectionObserver(
+      ([entry]) => {
+        onScreen = entry.isIntersecting;
+      },
+      { rootMargin: "20% 0px" },
+    );
+    visibility.observe(box);
+
     const tick = (_time: number, deltaMs: number) => {
       const shape = shapeRef.current;
-      if (!shape) return;
+      if (!shape || !onScreen) return;
       const { g, road } = shape;
       const pos = state.pos;
 
@@ -472,6 +483,7 @@ export default function Experience() {
 
     gsap.ticker.add(tick);
     return () => {
+      visibility.disconnect();
       gsap.ticker.remove(tick);
       trigger.kill();
       gsap.killTweensOf([body, suspension, state]);
